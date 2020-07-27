@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}    
+	{{ 'Reviews for %name%'|trans({'%name%':item.name}) }}
+{% endblock %}
+
+{% block body %}
+
+<div class="pure-g">
+	<div class="pure-u-1 pure-u-lg-1 crumps">
+		<a href="/">{{'Home'|trans}}</a> 
+	 	
+	 		> <a href="/category/{{item.categories_id[0]}}">{{item.categories[0]}}</a>
+	 
+			> <a href="/location/{{item.state_id}}/{{item.town_id}}/category/{{item.categories_id[0]}}">{{item.categories[0]}} in {{item.town}}, {{item.state}}</a>
+	 
+			> {{ item.name }} {{'Review'|trans}}
+	</div>
+</div>
+ 
+
+
+<div class="pure-g">
+	<div class="pure-u-1 pure-u-lg-1">
+	<img src="{{item.image}}" height="100">
+	 <h1>{{item.name}}</h1>
+	</div>
+</div>
+
+{# LINKS #}
+
+ 
+<div class="pure-g commentswrapper">
+	<div class="pure-u-1 pure-u-lg-1">	
+		<div class="neighbors">
+			<h3 class="reviews-title">Other Companies</h3>
+			{% for neighbor in item.neighbors %}
+				<a href="/{{neighbor['id']}}/{{neighbor['slug']}}">{{neighbor['name']}}</a> 
+				{% if loop.last == false %} :: 
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+</div>
+ 
+
+{# REVIEWS #}
+
+{% if item.comments|length > 0 %}
+
+	<div class="pure-g commentswrapper">
+		<h3 class="reviews-title">Reviews ({{item.comments|length}})</h3>
+		<div class="pure-u-1 pure-u-lg-1">	
+			{% for comment in item.comments %}
+				<div class="pure-g comments">
+				 
+					<div class="pure-u-1">
+						<b>author</b>: {{ comment.author }} <br><b>rating:</b> {{comment.rating}} <br> <b>comment:</b> {{ comment.text }} <br> <b>date:</b> {{ comment.date }}
+					</div>
+
+				</div>
+			{% endfor %}
+
+		</div>
+	</div>
+{% endif %} {# if item.comments|length > 0  #}
+
+
+{% if item.neighbor_comments|length > 0 %}
+	<div style="margin-bottom:10px"> <h3> Comments for other comanies </h3> </div>
+	
+	{% for comment in item.neighbor_comments %}
+
+		<div class="pure-g comments">
+			<div class="pure-u-1-8">
+				<a href="/{{ comment.place_id }}/{{ comment.slug }}"><img onerror="imgError(this);" src="{{ comment.image }}" width="90%" /></a>
+			</div>
+			<div class="pure-u-7-8">
+				<b>author</b>: {{ comment.author }} <br><b>rating:</b> {{comment.rating}} <br> <b>comment:</b> {{ comment.text }} <br> <b>date:</b> {{ comment.date }}
+			</div>
+		</div>
+
+	{% endfor %}
+
+{% endif %}
+
+
+{% endblock %}
+
+ 

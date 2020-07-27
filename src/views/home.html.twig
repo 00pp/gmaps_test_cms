@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="{{constant('LOCALE')}}">
+
+<head>
+    <title>{% block title %} {{'Home Page Title'|trans}} {% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="/css/pure-min.css">
+        <link rel="stylesheet" type="text/css" href="/css/pure-extend.css">
+        <!--[if lte IE 8]>
+            <link rel="stylesheet" href="/css/grids-responsive-old-ie-min.css">
+        <![endif]-->
+        <!--[if gt IE 8]><!-->
+            <link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css">
+        <!--<![endif]-->
+        <link rel="stylesheet" type="text/css" href="/css/styles.css">
+        <link rel="stylesheet" type="text/css" href="/css/tabs.css">
+
+		<link rel="stylesheet" type="text/css" href="/css/slick/slick.css"/>
+		<link rel="stylesheet" type="text/css" href="/css/slick/slick-theme.css"/>
+
+		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script src="/js/slick/slick.min.js"></script>
+
+    {% endblock %}
+</head>
+
+<body>
+
+ 
+ 
+<div class="content">
+
+ 
+
+	<div class="pure-g">
+		<div class="pure-u-1">
+	 
+			<div class="home artistphotosblock">
+			 
+			    {% for a in items %}
+			    	<div class="homepageitem">
+			    	<a href="/{{a.id}}/{{a.slug}}"><img alt="{{a.name}}" src="{{a.image}}" title="{{a.name}}" style="max-height:150px; max-width:195px" /></a>
+			    	</div>
+			    {% endfor %}
+			   
+			</div>
+		</div>
+	</div>
+
+</div>
+ 
+</body>
+
+</html>
